@@ -41,3 +41,6 @@ locals,Social Justice,People from different backgrounds getting on well together
 fml_vol,Social Justice,Formal volunteering in the last 12 months,Financial Year,Londoners get on with and support each other,Formal volunteering in the last 12 months,,,,.0%
 inf_vol,Social Justice,Informal volunteering in the last 12 months,Financial Year,Londoners get on with and support each other,Informal volunteering in the last 12 months,,,,.0%
 help,Social Justice,"Percentage of adults who definitely or tend to agree with the statement 'if I needed help, there are people who would be there for me'",Financial Year,Londoners get on with and support each other,"Percentage of adults who definitely or tend to agree with the statement 'if I needed help, there are people who would be there for me'",,,,.0%
+epc,Environment,Energy efficiency ratings of new and existing homes,Financial Year,London is a net zero carbon city,Energy efficiency ratings of new and existing homes,,,,.0%
+rcyc,Environment,Household waste recycling rate,Financial Year,London is a net zero carbon city,Household waste recycling rate,,,,.0%
+ren_eng,Environment,Renewable electricity generated in London,Financial Year,London is a net zero carbon city,Renewable electricity generated in London,,,,.0f
