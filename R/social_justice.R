@@ -3,11 +3,16 @@ library(dplyr)
 library(tidyr)
 library(readr)
 
-bf_fl <- "U:/Data/sol_temp/SJ_Health_CYP.xlsx"
+bf_fl <- "data/SJ.xlsx"
 
 excel_sheets(bf_fl)
 
 hhi_lb <- "Percentage of individuals living in households with less than 50 per cent of contemporary median household income, after housing costs"
+
+
+##### Incomes LLO ####
+
+## Household Income ##
 
 hhi <- read_excel(bf_fl, "Median HHI") %>%
   select(Year:UK) %>%
@@ -19,6 +24,10 @@ hhi <- read_excel(bf_fl, "Median HHI") %>%
          area_code = "") %>%
   select(timeperiod_sortable, timeperiod_label, timeperiod_type,
          indicator, llo, area_name, area_code, value)
+
+##### Dignity LLO ####
+
+## Treated unfairly ##
 
 unf_lb <- "Proportion of Londoners treated unfairly in the last 12 months because of one or several protected characteristics or because of their social class"
 
@@ -34,7 +43,8 @@ unf <- read_excel(bf_fl, "Unfair") %>%
          indicator, llo, area_name, area_code, value)
 
 
-### Pay gaps
+## Gender pay gap ##
+
 gpg <- read_excel(bf_fl, "Gender PG") %>%
   select(Year:UK) %>%
   pivot_longer(-Year, names_to = "area_name") %>%
@@ -46,6 +56,7 @@ gpg <- read_excel(bf_fl, "Gender PG") %>%
   select(timeperiod_sortable, timeperiod_label, timeperiod_type,
          indicator, llo, area_name, area_code, value)
 
+## Ethnicity pay gap ##
 
 ethpg <- read_excel(bf_fl, "Ethnicity PG") %>%
   select(Year:`Rest of England and Wales`) %>%
@@ -58,6 +69,8 @@ ethpg <- read_excel(bf_fl, "Ethnicity PG") %>%
   select(timeperiod_sortable, timeperiod_label, timeperiod_type,
          indicator, llo, area_name, area_code, value)
 
+## Disability pay gap ##
+
 dispg <- read_excel(bf_fl, "Disability PG") %>%
   select(Year:UK) %>%
   pivot_longer(-Year, names_to = "area_name") %>%
@@ -69,6 +82,9 @@ dispg <- read_excel(bf_fl, "Disability PG") %>%
   select(timeperiod_sortable, timeperiod_label, timeperiod_type,
          indicator, llo, area_name, area_code, value)
 
+#### Say in running city LLO ####
+
+## Voter Registration ##
 
 vote_reg <- read_excel(bf_fl, "Vote") %>%
   select(Year:England) %>%
@@ -81,6 +97,7 @@ vote_reg <- read_excel(bf_fl, "Vote") %>%
   select(timeperiod_sortable, timeperiod_label, timeperiod_type,
          indicator, llo, area_name, area_code, value)
 
+## Influence decisions ##
 
 inf_dec <- read_excel(bf_fl, "Influence decisions") %>%
   select(Year:England) %>%
@@ -93,6 +110,8 @@ inf_dec <- read_excel(bf_fl, "Influence decisions") %>%
   select(timeperiod_sortable, timeperiod_label, timeperiod_type,
          indicator, llo, area_name, area_code, value)
 
+
+#### Londoners get on LLO ####
 
 locals <- read_excel(bf_fl, "Locals get on") %>%
   select(Month:Value) %>%
@@ -139,13 +158,12 @@ hlp <- read_excel(bf_fl, "Help") %>%
   select(timeperiod_sortable, timeperiod_label, timeperiod_type,
          indicator, llo, area_name, area_code, value)
 
-# all_sj <- bind_rows(hhi, unf, gpg, ethpg, dispg, vote_reg, inf_dec, locals, fml_vol,
-#                     inf_vol, hlp)
+#### Combine dfs and write to csv ####
 
 dig <- bind_rows(unf, gpg, ethpg, dispg)
 supp <- bind_rows(locals, fml_vol, inf_vol, hlp)
 
-
+## Need to change to sharepoint synced file (should be in config file of some sort) ##
 write_csv(dig, "U:/Data/sol_temp/llo_dignity_pay_gaps_unfair.csv")
 write_csv(supp, "U:/Data/sol_temp/llo_support_eachother.csv")
 write_csv(hhi, "U:/Data/sol_temp/llo_incomes_hhi.csv")

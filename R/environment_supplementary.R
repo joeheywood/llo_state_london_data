@@ -5,8 +5,7 @@ library(glue)
 library(stringr)
 library(readr)
 
-env_fl <- "C:/Users/JoeHeywood/Greater London Authority/IU - State of London report/Version 6 (June 2025)/Data/Environment/Environment v6.xlsx"
-
+env_fl <- "data/Environment v6.xlsx"
 
 
 epc <- read_excel(env_fl, "Fig 2 Energy performance") |>
@@ -53,4 +52,5 @@ ren_eng <- read_excel(env_fl, "Fig 4 Renewable energy gen") |>
 
 nzcc <- bind_rows(epc, rcyc, ren_eng)
 
+## should ideally to directly to the Sharepoint directory ##
 write_csv(nzcc, "llo_net_zero_supps.csv")
